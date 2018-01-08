@@ -7,11 +7,17 @@ public class Ksi {
 		
 		ListaSorteos listaSorteo = new ListaSorteos();
 		ListaFilas listaFilas = new ListaFilas();
+		ListaSeries listaSeries = new ListaSeries();
 		listaSorteo.crearEstructura();
 		listaSorteo.poblarMapaSorteos();
 		listaFilas.crearEstructura();
-		//listaFilas.mostrarMapas();
+		listaFilas.poblarMapasFilas(listaSorteo.getMapa());		
+		listaSeries.crearEstructura();
+		listaSeries.poblarMapaSeries(listaFilas.getLista());
+
 		//listaSorteo.mostrarMapa();
+		//listaFilas.mostrarMapas();
+		listaSeries.mostrarMapa();		
 
 	}
 

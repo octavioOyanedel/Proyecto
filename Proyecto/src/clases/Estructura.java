@@ -8,12 +8,29 @@ public class Estructura {
 	private Sorteo sorteo;	
 	private Numero numero;
 	private Fila fila;
+	private Serie serie;
 	private Consultas consulta;
 	private ListaFila listaFila;
 	private int sorteos;
 	
 	public Estructura() {
 			 			
+	}
+	
+	public void crearEstructura(HashMap<Integer,Object> mapa) {
+		
+		int key = 0;
+		
+		for(int i = 0;i < Numero.getLargototal();i++) {
+			
+			key = i + 1;
+			
+			serie = new Serie();			
+			serie.crearEstructura();
+			mapa.put(key, serie);
+			
+		}
+		
 	}
 	
 	public void crearEstructura(HashMap<Integer,Object> mapa,int flag) {
@@ -87,9 +104,22 @@ public class Estructura {
 				}
 				break;	
 				
+			case 4 :
+				
+				consulta = new Consultas();
+				sorteos = consulta.numeroFilas(consulta.obtenerResultadosConsulta(consulta.getSqlSorteos()));
+				
+				for(int i = 0;i < sorteos;i++) {
+					
+					numero = new Numero();			
+					lista.add(numero);
+					
+				}
+				break;	
+				
 			default : 
 		    	 
-				System.out.println("flag no valido");				
+				System.out.println("flag no valido");
 				
 		}		
 		

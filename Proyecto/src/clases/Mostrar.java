@@ -6,6 +6,7 @@ public class Mostrar {
 	
 	private Sorteo sorteo;
 	private Numero numero;
+	private Serie serie;
 	private Fila fila;
 	private ListaFila listaFila;
 	
@@ -27,7 +28,7 @@ public class Mostrar {
 	public void mostrarMapa(HashMap<Integer,Object> mapa) {
 		
 		for(Map.Entry<Integer, Object> entry : mapa.entrySet()) {
-			
+
 			if(entry.getValue() instanceof Sorteo) {
 				
 				sorteo = (Sorteo)mapa.get(entry.getKey());
@@ -43,6 +44,14 @@ public class Mostrar {
 				System.out.println("");
 				
 			}
+			
+			if(entry.getValue() instanceof Serie) {
+				
+				serie = (Serie)mapa.get(entry.getKey());
+				mostrarMapa(serie.getLista());
+				System.out.println("");
+				
+			}	
 			
 		}
 		

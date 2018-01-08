@@ -7,10 +7,18 @@ public class ListaFilas {
 	private ArrayList<Object> lista;
 	private Estructura estructura;
 	private Mostrar mostrar;
+	private Poblar poblar;
 	
 	public ListaFilas() {
 		
 		lista = new ArrayList<Object>();
+		
+	}
+	
+	public void poblarMapasFilas(HashMap<Integer,Object> mapa) {
+		
+		poblar = new Poblar();
+		poblar.poblarMapasFilas(mapa,lista);
 		
 	}
 	
@@ -26,6 +34,12 @@ public class ListaFilas {
 		
 		mostrar = new Mostrar();
 		mostrar.mostrarMapas(lista);
+		
+	}
+
+	public ArrayList<Object> getLista() {
+		
+		return lista;
 		
 	}
 
