@@ -9,12 +9,247 @@ public class Poblar {
 	private Consultas consulta;
 	private Sorteo sorteo;
 	private Numero numero;
+	private Numero numeroTemp;
+	private Numero numeroCentro;
+	private Numero numeroIzq;
+	private Numero numeroDer;
 	private Serie serie;
 	private Fila fila;
+	private Patron patron;
+	private Estructura estructura;
 	private ListaFila listaFila;
+	private ListaPatron listaPatron;
 	private ResultSet resultados;
 	
 	public Poblar() {
+		
+	}
+	//mapa series,lista patrones
+	public void poblarMapasPatrones(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
+		
+		int key = 0;
+		
+		for(int i = 0;i <lista.size();i++) {
+			
+			key = i+1;
+			serie = (Serie)mapa.get(key);
+			listaPatron = (ListaPatron)lista.get(i);
+			obtenerPatrones(serie.getLista(),listaPatron.getMapa());
+			
+		}
+		
+	}
+	//lista series, mapa patron
+	public void obtenerPatrones(ArrayList<Object> lista,HashMap<Integer,Object> mapa) {
+		
+		int inicio = 0;
+		int fin = 0;
+		int largoPatron = Numero.getLargopatron();
+		int factor = obtenerFactor(largoPatron);
+		
+		inicio = factor;
+		fin = (Numero.getLargototal()-1)-factor;
+		
+		for(int i = inicio;i <= fin;i++ ) {
+			
+			armarPatronTemporal(mapa,lista,i,factor);
+									
+		}
+		
+	}
+	//lista series, mapa patron
+	public void armarPatronTemporal(HashMap<Integer,Object> mapa,ArrayList<Object> lista,int indice,int factor) {
+		
+		int flag = 6;
+		int posicionMedia = Numero.getLargopatron()/2;
+		ArrayList<Object> listaPatronTemporal = new ArrayList<Object>();
+		estructura = new Estructura();
+		estructura.crearEstructura(listaPatronTemporal, flag);
+		numero = (Numero)lista.get(indice);
+		numeroCentro = (Numero)listaPatronTemporal.get(posicionMedia);
+		numeroCentro.setNumero(numero.getNumero());
+		armarPatronTemporalIzq(lista,listaPatronTemporal,indice,factor,posicionMedia);
+		armarPatronTemporalDer(lista,listaPatronTemporal,indice,factor,posicionMedia);
+		comprobarPatron(mapa,listaPatronTemporal);
+		
+	}
+	//mapa patron, lista temmporal
+	public void comprobarPatron(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
+		
+		int key = 0;
+		
+		if(mapa.isEmpty()) {
+
+			agregarPatron(mapa,lista);
+			
+		}else {
+
+			if(existePatron(mapa,lista)) {
+				
+				key = buscarKey(mapa,lista);
+				
+				incrementarPatron(key);
+				
+			}else {
+				
+				agregarPatron(mapa,lista);
+				
+			}
+			
+		}
+
+	}
+	
+	public int buscarKey(HashMap<Integer,Object> mapa,ArrayList<Object> lista){
+		
+		return 0;
+		
+	}
+	//mapa patron, lista temmporal
+	public void agregarPatron(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
+
+		int flag = 7;
+		int key = 0;
+		patron = new Patron();
+		estructura = new Estructura();
+		estructura.crearEstructura(patron.getLista(), flag);
+		copiarNumerosPatrones(lista,patron.getLista());
+		numero = (Numero)patron.getLista().get(Numero.getLargopatron());
+		numero.setNumero(numero.getNumero()+1);
+		key = ultimaKey(mapa) + 1;
+		mapa.put(key, patron);
+	}
+	
+	public int ultimaKey(HashMap<Integer,Object> mapa) {
+		
+		int key = 0;
+		
+		for(Map.Entry<Integer, Object>entry : mapa.entrySet()) {
+			
+			key = entry.getKey();
+			
+		}
+		
+		return key;
+	}
+	//mapa patron, lista temmporal
+	public void copiarNumerosPatrones(ArrayList<Object> listaTemp,ArrayList<Object> listaPatron) {
+
+		for(int i  = 0; i < listaTemp.size();i++) {
+			
+			numeroTemp = (Numero)listaTemp.get(i);
+			numero = (Numero)listaPatron.get(i);
+			numero.setNumero(numeroTemp.getNumero());
+						
+		}
+		
+	}
+	//mapa patron, lista temmporal
+	public boolean existePatron(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
+
+		int cont = 0;
+		int control = Numero.getLargopatron();
+		
+		for(Map.Entry<Integer, Object>entry : mapa.entrySet()) {
+			
+			patron = (Patron)entry.getValue();
+			
+			for(int i = 0;i < lista.size();i++) {
+				
+				numeroTemp = (Numero)lista.get(i);
+				numero = (Numero)patron.getLista().get(i);
+				
+				if(numeroTemp.getNumero() == numero.getNumero()) {
+					
+					cont++;
+					
+				}
+								
+			}
+			
+			if(cont == control) {
+				
+				return true;
+				
+			}
+			
+		}
+				
+		return false;
+		
+	}
+	
+	public void incrementarPatron(int key) {
+		
+		System.out.println("incrementar patron");
+		
+	}
+	
+	public void armarPatronTemporalIzq(ArrayList<Object> lista,ArrayList<Object> listaTemp,int indice,int factor,int posicionMedia) {
+		
+		for(int i = 0;i < factor;i++ ) {
+			
+			numero = (Numero)lista.get(indice-1);
+			numeroIzq = (Numero)listaTemp.get(posicionMedia-1);
+			numeroIzq.setNumero(numero.getNumero());
+			
+		}
+		
+	}
+	
+	public void armarPatronTemporalDer(ArrayList<Object> lista,ArrayList<Object> listaTemp,int indice,int factor,int posicionMedia) {
+		
+		for(int i = 0;i < factor;i++ ) {
+			
+			numero = (Numero)lista.get(indice+1);
+			numeroDer = (Numero)listaTemp.get(posicionMedia+1);
+			numeroDer.setNumero(numero.getNumero());
+			
+		}		
+		
+	}	
+	
+	public int obtenerFactor(int largoPatron) {
+		
+		int factor = 0;
+		
+		switch(largoPatron) {
+		
+		case 3 :
+			factor = 1;
+			break;	
+			
+		case 5 :
+			factor = 2;
+			break;
+			
+		case 7 :
+			factor = 3;
+			break;	
+			
+		case 9 :
+			factor = 4;
+			break;	
+			
+		case 11 :
+			factor = 5;
+			break;	
+			
+		case 13 :
+			factor = 6;
+			break;	
+			
+		case 14 :
+			factor = 7;
+			break;	
+			
+		default : 
+	    	 
+			System.out.println("largoPatron no valido");	
+		
+		}
+		
+		return factor;
 		
 	}
 	
@@ -55,9 +290,9 @@ public class Poblar {
 				
 				key = 21;
 				break;	
-			default : 
 				
-		    	 
+			default : 
+						    	 
 				System.out.println("indice no valido");	
 				
 		}

@@ -7,6 +7,7 @@ public class Numero {
 	private static final int largoSorteo = 15;
 	private static final int largoFila = 5;
 	private static final int largoSorteoSinId = 14;
+	private static final int largoPatron = 7;
 	
 	public Numero() {
 		
@@ -41,6 +42,12 @@ public class Numero {
 	public int getNumero() {
 		
 		return numero;
+		
+	}
+
+	public static int getLargopatron() {
+		
+		return largoPatron;
 		
 	}
 

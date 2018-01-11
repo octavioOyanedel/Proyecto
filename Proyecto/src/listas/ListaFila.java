@@ -6,8 +6,6 @@ public class ListaFila {
 	
 	private HashMap<Integer,Object> mapa;
 	private Estructura estructura;	
-	private Mostrar mostrar;
-	private Poblar poblar;
 	
 	public ListaFila() {
 		

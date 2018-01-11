@@ -11,17 +11,29 @@ public class Estructura {
 	private Serie serie;
 	private Consultas consulta;
 	private ListaFila listaFila;
+	private ListaPatron listaPatron;
 	private int sorteos;
 	
 	public Estructura() {
 			 			
 	}
 	
+	public void crearPatron(ArrayList<Object> lista) {
+		
+		for(int i = 0;i < Numero.getLargopatron()-1;i++) {
+			
+			numero = new Numero();
+			lista.add(numero);
+			
+		}
+		
+	}
+	
 	public void crearEstructura(HashMap<Integer,Object> mapa) {
 		
 		int key = 0;
 		
-		for(int i = 0;i < Numero.getLargototal();i++) {
+		for(int i = 0;i <= Numero.getLargototal();i++) {
 			
 			key = i + 1;
 			
@@ -110,6 +122,36 @@ public class Estructura {
 				sorteos = consulta.numeroFilas(consulta.obtenerResultadosConsulta(consulta.getSqlSorteos()));
 				
 				for(int i = 0;i < sorteos;i++) {
+					
+					numero = new Numero();			
+					lista.add(numero);
+					
+				}
+				break;	
+				
+			case 5 :
+				
+				for(int i = 0;i < Numero.getLargototal();i++) {
+					
+					listaPatron = new ListaPatron();
+					lista.add(listaPatron);
+					
+				}
+				break;	
+				
+			case 6 :
+				
+				for(int i = 0;i < Numero.getLargopatron();i++) {
+					
+					numero = new Numero();			
+					lista.add(numero);
+					
+				}
+				break;		
+				
+			case 7 :
+				
+				for(int i = 0;i < Numero.getLargopatron()+1;i++) {
 					
 					numero = new Numero();			
 					lista.add(numero);
