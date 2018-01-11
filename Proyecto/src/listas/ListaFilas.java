@@ -32,8 +32,9 @@ public class ListaFilas {
 	
 	public void mostrarMapas() {
 		
+		int flag = 1;
 		mostrar = new Mostrar();
-		mostrar.mostrarMapas(lista);
+		mostrar.mostrarMapas(lista,flag);
 		
 	}
 

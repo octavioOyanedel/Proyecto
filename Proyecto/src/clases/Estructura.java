@@ -33,7 +33,7 @@ public class Estructura {
 		
 		int key = 0;
 		
-		for(int i = 0;i <= Numero.getLargototal();i++) {
+		for(int i = 0;i <= Numero.getLargototal()-1;i++) {
 			
 			key = i + 1;
 			

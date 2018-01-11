@@ -7,10 +7,19 @@ public class ListaPatrones {
 	private ArrayList<Object> lista;
 	private Estructura estructura;
 	private Poblar poblar;
+	private Mostrar mostrar;
 	
 	public ListaPatrones() {
 		
 		lista = new ArrayList<Object>();
+		
+	}
+	
+	public void mostrarMapas() {
+		
+		int flag = 2;
+		mostrar = new Mostrar();
+		mostrar.mostrarMapas(lista,flag);
 		
 	}
 	

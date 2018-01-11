@@ -8,19 +8,34 @@ public class Mostrar {
 	private Numero numero;
 	private Serie serie;
 	private Fila fila;
+	private Patron patron;
 	private ListaFila listaFila;
+	private ListaPatron listaPatron;
 	
 	public Mostrar() {				
 		
 	}
 
-	public void mostrarMapas(ArrayList<Object> lista) {
+	public void mostrarMapas(ArrayList<Object> lista,int flag) {
 		
 		for(int i = 0;i < lista.size();i++) {
 
-			listaFila = (ListaFila)lista.get(i);
-			mostrarMapa(listaFila.getMapa());
-			System.out.println();
+			if(flag == 1) {
+				
+				listaFila = (ListaFila)lista.get(i);
+				mostrarMapa(listaFila.getMapa());
+				System.out.println();
+				
+			}
+			
+			if(flag == 2) {
+				
+				listaPatron = (ListaPatron)lista.get(i);
+				mostrarMapa(listaPatron.getMapa());
+				System.out.println();	
+				
+			}
+
 		}
 		
 	}
@@ -49,6 +64,14 @@ public class Mostrar {
 				
 				serie = (Serie)mapa.get(entry.getKey());
 				mostrarMapa(serie.getLista());
+				System.out.println("");
+				
+			}	
+			
+			if(entry.getValue() instanceof Patron) {
+				
+				patron = (Patron)mapa.get(entry.getKey());
+				mostrarMapa(patron.getLista());
 				System.out.println("");
 				
 			}	

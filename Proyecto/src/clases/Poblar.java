@@ -20,11 +20,12 @@ public class Poblar {
 	private ListaFila listaFila;
 	private ListaPatron listaPatron;
 	private ResultSet resultados;
+	private int sorteos;
 	
 	public Poblar() {
 		
 	}
-	//mapa series,lista patrones
+
 	public void poblarMapasPatrones(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
 		
 		int key = 0;
@@ -39,16 +40,18 @@ public class Poblar {
 		}
 		
 	}
-	//lista series, mapa patron
+
 	public void obtenerPatrones(ArrayList<Object> lista,HashMap<Integer,Object> mapa) {
 		
 		int inicio = 0;
 		int fin = 0;
 		int largoPatron = Numero.getLargopatron();
 		int factor = obtenerFactor(largoPatron);
+		consulta = new Consultas();
+		sorteos = consulta.numeroFilas(consulta.obtenerResultadosConsulta(consulta.getSqlSorteos()));
 		
 		inicio = factor;
-		fin = (Numero.getLargototal()-1)-factor;
+		fin = sorteos-factor;
 		
 		for(int i = inicio;i <= fin;i++ ) {
 			
@@ -57,10 +60,10 @@ public class Poblar {
 		}
 		
 	}
-	//lista series, mapa patron
+
 	public void armarPatronTemporal(HashMap<Integer,Object> mapa,ArrayList<Object> lista,int indice,int factor) {
 		
-		int flag = 6;
+		int flag = 6;		
 		int posicionMedia = Numero.getLargopatron()/2;
 		ArrayList<Object> listaPatronTemporal = new ArrayList<Object>();
 		estructura = new Estructura();
@@ -73,7 +76,7 @@ public class Poblar {
 		comprobarPatron(mapa,listaPatronTemporal);
 		
 	}
-	//mapa patron, lista temmporal
+
 	public void comprobarPatron(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
 		
 		int key = 0;
@@ -88,8 +91,16 @@ public class Poblar {
 				
 				key = buscarKey(mapa,lista);
 				
-				incrementarPatron(key);
-				
+				if(key != 0) {
+					
+					incrementarPatron(mapa,key);
+					
+				}else {
+					
+					agregarPatron(mapa,lista);
+					
+				}
+								
 			}else {
 				
 				agregarPatron(mapa,lista);
@@ -102,10 +113,38 @@ public class Poblar {
 	
 	public int buscarKey(HashMap<Integer,Object> mapa,ArrayList<Object> lista){
 		
+		int cont = 0;
+		int control = Numero.getLargopatron();
+		
+		for(Map.Entry<Integer, Object>entry : mapa.entrySet()) {
+			
+			patron = (Patron)entry.getValue();
+			
+			for(int i = 0;i < lista.size();i++) {
+				
+				numeroTemp = (Numero)lista.get(i);
+				numero = (Numero)patron.getLista().get(i);
+				
+				if(numeroTemp.getNumero() == numero.getNumero()) {
+					
+					cont++;
+					
+				}
+								
+			}
+			
+			if(cont == control) {
+				
+				return entry.getKey();
+				
+			}
+			
+		}
+				
 		return 0;
 		
 	}
-	//mapa patron, lista temmporal
+
 	public void agregarPatron(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
 
 		int flag = 7;
@@ -118,6 +157,7 @@ public class Poblar {
 		numero.setNumero(numero.getNumero()+1);
 		key = ultimaKey(mapa) + 1;
 		mapa.put(key, patron);
+		
 	}
 	
 	public int ultimaKey(HashMap<Integer,Object> mapa) {
@@ -132,7 +172,7 @@ public class Poblar {
 		
 		return key;
 	}
-	//mapa patron, lista temmporal
+
 	public void copiarNumerosPatrones(ArrayList<Object> listaTemp,ArrayList<Object> listaPatron) {
 
 		for(int i  = 0; i < listaTemp.size();i++) {
@@ -144,7 +184,7 @@ public class Poblar {
 		}
 		
 	}
-	//mapa patron, lista temmporal
+
 	public boolean existePatron(HashMap<Integer,Object> mapa,ArrayList<Object> lista) {
 
 		int cont = 0;
@@ -179,10 +219,11 @@ public class Poblar {
 		
 	}
 	
-	public void incrementarPatron(int key) {
+	public void incrementarPatron(HashMap<Integer,Object> mapa,int key) {
 		
-		System.out.println("incrementar patron");
-		
+		patron = (Patron)mapa.get(key);
+		numero = (Numero)patron.getLista().get(Numero.getLargopatron());
+		numero.setNumero(numero.getNumero()+1);
 	}
 	
 	public void armarPatronTemporalIzq(ArrayList<Object> lista,ArrayList<Object> listaTemp,int indice,int factor,int posicionMedia) {

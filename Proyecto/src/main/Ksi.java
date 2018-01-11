@@ -17,9 +17,10 @@ public class Ksi {
 		listaSeries.poblarMapaSeries(listaFilas.getLista());
 		listaPatrones.crearEstructura();
 		listaPatrones.poblarMapasPatrones(listaSeries.getMapa());
+		//listaPatrones.mostrarMapas();
 		//listaSorteo.mostrarMapa();
 		//listaFilas.mostrarMapas();
-		//listaSeries.mostrarMapa();		
+		listaSeries.mostrarMapa();		
 
 	}
 
