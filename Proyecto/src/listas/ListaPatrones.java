@@ -5,9 +5,9 @@ import java.util.*;
 public class ListaPatrones {
 
 	private ArrayList<Object> lista;
-	private Estructura estructura;
-	private Poblar poblar;
+	private ListaPatron listaPatron;
 	private Mostrar mostrar;
+	private Columna columna;
 	
 	public ListaPatrones() {
 		
@@ -15,26 +15,24 @@ public class ListaPatrones {
 		
 	}
 	
-	public void mostrarMapas() {
+	public void crearColeccionPatrones(HashMap<Integer,Object> mapa) {
 		
-		int flag = 2;
+		for(int i=0;i<Numero.getLargosorteo();i++) {
+			
+			listaPatron = new ListaPatron();
+			int key = i+1;
+			columna = (Columna)mapa.get(key);
+			listaPatron.crearColeccionPatrones(columna.getLista());
+			lista.add(listaPatron);
+
+		}
+
+	}
+	
+	public void mostrarColeccion() {
+
 		mostrar = new Mostrar();
-		mostrar.mostrarMapas(lista,flag);
-		
-	}
-	
-	public void poblarMapasPatrones(HashMap<Integer,Object> mapa) {
-		
-		poblar = new Poblar();
-		poblar.poblarMapasPatrones(mapa,lista);
-		
-	}
-	
-	public void crearEstructura() {
-		
-		int flag = 5;
-		estructura = new Estructura();
-		estructura.crearEstructura(lista, flag);
+		mostrar.mostrarMapas(lista);
 		
 	}
 

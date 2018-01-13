@@ -5,23 +5,13 @@ public class Ksi {
 
 	public static void main(String[] args) {
 		
-		ListaSorteos listaSorteo = new ListaSorteos();
-		ListaFilas listaFilas = new ListaFilas();
-		ListaSeries listaSeries = new ListaSeries();
+		ListaColumnas listaColumnas = new ListaColumnas();
 		ListaPatrones listaPatrones = new ListaPatrones();
-		listaSorteo.crearEstructura();
-		listaSorteo.poblarMapaSorteos();
-		listaFilas.crearEstructura();
-		listaFilas.poblarMapasFilas(listaSorteo.getMapa());		
-		listaSeries.crearEstructura();
-		listaSeries.poblarMapaSeries(listaFilas.getLista());
-		listaPatrones.crearEstructura();
-		listaPatrones.poblarMapasPatrones(listaSeries.getMapa());
-		//listaPatrones.mostrarMapas();
-		//listaSorteo.mostrarMapa();
-		//listaFilas.mostrarMapas();
-		listaSeries.mostrarMapa();		
-
+		listaColumnas.crearColeccionColumnas();
+		listaPatrones.crearColeccionPatrones(listaColumnas.getMapa());
+		listaColumnas.mostrarColeccion();
+		//listaPatrones.mostrarColeccion();
+		
 	}
 
 }//fin clase

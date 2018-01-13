@@ -3,10 +3,7 @@ package clases;
 public class Numero {
 	
 	private int numero;
-	private static final int largoTotal = 25;
-	private static final int largoSorteo = 15;
-	private static final int largoFila = 5;
-	private static final int largoSorteoSinId = 14;
+	private static final int largoSorteo = 14;
 	private static final int largoPatron = 3;
 	
 	public Numero() {
@@ -14,28 +11,16 @@ public class Numero {
 		numero = 0;
 		
 	}
-
-	public static int getLargototal() {
+	
+	public Numero(int uno) {
 		
-		return largoTotal;
+		numero = uno;
 		
 	}
-
+	
 	public static int getLargosorteo() {
 		
 		return largoSorteo;
-		
-	}
-
-	public static int getLargofila() {
-		
-		return largoFila;
-		
-	}
-
-	public static int getLargosorteosinid() {
-		
-		return largoSorteoSinId;
 		
 	}
 

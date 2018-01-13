@@ -4,76 +4,43 @@ import listas.*;
 
 public class Mostrar {
 	
-	private Sorteo sorteo;
 	private Numero numero;
-	private Serie serie;
-	private Fila fila;
 	private Patron patron;
-	private ListaFila listaFila;
+	private Columna columna;
 	private ListaPatron listaPatron;
 	
 	public Mostrar() {				
 		
 	}
 
-	public void mostrarMapas(ArrayList<Object> lista,int flag) {
-		
-		for(int i = 0;i < lista.size();i++) {
+	public void mostrarMapas(ArrayList<Object> lista) {
 
-			if(flag == 1) {
-				
-				listaFila = (ListaFila)lista.get(i);
-				mostrarMapa(listaFila.getMapa());
-				System.out.println();
-				
-			}
+		for(int i = 0;i < lista.size();i++) {
 			
-			if(flag == 2) {
-				
-				listaPatron = (ListaPatron)lista.get(i);
-				mostrarMapa(listaPatron.getMapa());
-				System.out.println();	
-				
-			}
+			listaPatron = (ListaPatron)lista.get(i);
+			mostrarMapa(listaPatron.getMapa());
+			System.out.println(); 
 
 		}
 		
 	}
 	
 	public void mostrarMapa(HashMap<Integer,Object> mapa) {
-		
+
 		for(Map.Entry<Integer, Object> entry : mapa.entrySet()) {
 
-			if(entry.getValue() instanceof Sorteo) {
+			if(entry.getValue() instanceof Columna) {
 				
-				sorteo = (Sorteo)mapa.get(entry.getKey());
-				mostrarMapa(sorteo.getLista());
-				System.out.println("");
-				
+				columna = (Columna)mapa.get(entry.getKey());
+				mostrarMapa(columna.getLista());
+				System.out.println("");	
 			}
-			
-			if(entry.getValue() instanceof Fila) {
-				
-				fila = (Fila)mapa.get(entry.getKey());
-				mostrarMapa(fila.getLista());
-				System.out.println("");
-				
-			}
-			
-			if(entry.getValue() instanceof Serie) {
-				
-				serie = (Serie)mapa.get(entry.getKey());
-				mostrarMapa(serie.getLista());
-				System.out.println("");
-				
-			}	
 			
 			if(entry.getValue() instanceof Patron) {
 				
 				patron = (Patron)mapa.get(entry.getKey());
 				mostrarMapa(patron.getLista());
-				System.out.println("");
-				
+				System.out.println("");	
 			}	
 			
 		}
