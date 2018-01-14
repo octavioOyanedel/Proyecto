@@ -7,7 +7,9 @@ public class Mostrar {
 	private Numero numero;
 	private Patron patron;
 	private Columna columna;
+	private Busqueda busqueda;
 	private ListaPatron listaPatron;
+	private ListaCandidato listaCandidato;
 	
 	public Mostrar() {				
 		
@@ -15,12 +17,28 @@ public class Mostrar {
 
 	public void mostrarMapas(ArrayList<Object> lista) {
 
-		for(int i = 0;i < lista.size();i++) {
+		if(lista.get(0) instanceof ListaPatron) {
 			
-			listaPatron = (ListaPatron)lista.get(i);
-			mostrarMapa(listaPatron.getMapa());
-			System.out.println(); 
+			for(int i = 0;i < lista.size();i++) {
+				
+				listaPatron = (ListaPatron)lista.get(i);
+				mostrarMapa(listaPatron.getMapa());
+				System.out.println(); 
 
+			}			
+			
+		}
+		
+		if(lista.get(0) instanceof ListaCandidato) {
+		
+			for(int i = 0;i < lista.size();i++) {
+				System.out.println("Columna: "+i); 
+				listaCandidato = (ListaCandidato)lista.get(i);
+				mostrarMapa(listaCandidato.getMapa());
+				System.out.println(); 
+	
+			}
+			
 		}
 		
 	}
@@ -40,6 +58,13 @@ public class Mostrar {
 				
 				patron = (Patron)mapa.get(entry.getKey());
 				mostrarMapa(patron.getLista());
+				System.out.println("");	
+			}	
+			
+			if(entry.getValue() instanceof Busqueda) {
+				
+				busqueda = (Busqueda)mapa.get(entry.getKey());
+				mostrarMapa(busqueda.getLista());
 				System.out.println("");	
 			}	
 			

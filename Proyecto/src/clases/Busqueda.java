@@ -1,16 +1,16 @@
 package clases;
 import java.util.*;
 
-public class Patron {
+public class Busqueda {
 	
 	private ArrayList<Object> lista;
 	
-	public Patron() {
+	public Busqueda() {
 		
 		lista = new ArrayList<Object>();
 		
 	}
-
+	
 	public ArrayList<Object> getLista() {
 		
 		return lista;
