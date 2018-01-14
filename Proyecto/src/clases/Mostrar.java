@@ -31,8 +31,10 @@ public class Mostrar {
 		
 		if(lista.get(0) instanceof ListaCandidato) {
 		
+			int numero = 0;
 			for(int i = 0;i < lista.size();i++) {
-				System.out.println("Columna: "+i); 
+				numero = i+1;
+				System.out.println("Numero: "+numero); 
 				listaCandidato = (ListaCandidato)lista.get(i);
 				mostrarMapa(listaCandidato.getMapa());
 				System.out.println(); 

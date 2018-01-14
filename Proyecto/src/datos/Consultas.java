@@ -7,7 +7,10 @@ public class Consultas {
 	
 	public Consultas() {
 		
-		sqlSorteos = "SELECT * FROM testKino";//base de datos actualizada al 13 01 2018
+		//kinototal
+		//kino
+		//testKino
+		sqlSorteos = "SELECT * FROM kino";//base de datos actualizada al 13 01 2018
 		
 	}
 	

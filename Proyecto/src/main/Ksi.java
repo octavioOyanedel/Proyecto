@@ -13,9 +13,9 @@ public class Ksi {
 		listaColumnas.crearColeccionColumnas();
 		listaPatrones.crearColeccionPatrones(listaColumnas.getMapa());
 		//listaColumnas.mostrarColeccion();
-		listaPatrones.mostrarColeccion();
+		//listaPatrones.mostrarColeccion();
 		listaBusqueda.crearColeccionBusquedas(listaColumnas.getMapa());
-		listaBusqueda.mostrarColeccion();
+		//listaBusqueda.mostrarColeccion();
 		listaCandidatos.crearColeccionCandidatos(listaBusqueda.getMapa(),listaPatrones.getLista());
 		listaCandidatos.mostrarColeccion();
 		
